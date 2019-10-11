@@ -107,3 +107,13 @@ func (m *BoolMatrix) CountTrues() int64 {
 	}
 	return counter
 }
+
+func (m *BoolMatrix) CountTruesInLine(line int) int {
+	lineStart := line * m.width / 8
+	counter := line * m.width % 8
+	res := 0
+	for i := 0; i < m.width; i++ {
+		res += int(m.matrix[lineStart+counter/8] & byte(math.Pow(2, float64(counter%8))))
+	}
+	return res
+}
