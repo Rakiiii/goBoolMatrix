@@ -99,3 +99,11 @@ func (m *BoolMatrix) SetByNumber(num *big.Int) bool {
 	}
 	return true
 }
+
+func (m *BoolMatrix) CountTrues() int64 {
+	counter := int64(0)
+	for _, i := range m.matrix {
+		counter += int64((i >> 7) + ((i >> 6) & 1) + ((i >> 5) & 1) + ((i >> 4) & 1) + ((i >> 3) & 1) + ((i >> 2) & 1) + ((i >> 1) & 1))
+	}
+	return counter
+}
