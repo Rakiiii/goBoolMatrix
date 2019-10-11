@@ -1,6 +1,9 @@
 package boolmatrixlib
 
-import "math"
+import (
+	"math"
+	"math/big"
+)
 
 //BoolMatrix is struct that simulate matrix of bools in linair massive with per bit value storage
 type BoolMatrix struct {
@@ -79,9 +82,20 @@ func (m *BoolMatrix) SetBool(i, j int, value bool) bool {
 	return false
 }
 
-func (m *BoolMatrix) SetByNumber(number int) bool {
-	if math.Pow(2, float64(m.width*m.heigh))-1 < float64(number) {
+func (m *BoolMatrix) SetByNumber(num *big.Int) bool {
+	slice := num.Bytes()
+	l := len(slice)
+	if l > len(m.matrix) {
 		return false
 	}
-
+	dif := len(m.matrix) - l
+	for i := 0; i < l; i++ {
+		m.matrix[i+dif] = slice[i]
+	}
+	if dif != 0 {
+		for i := 0; i < dif; i++ {
+			m.matrix[i] = 0
+		}
+	}
+	return true
 }
