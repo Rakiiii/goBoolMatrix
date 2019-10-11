@@ -118,3 +118,12 @@ func (m *BoolMatrix) CountTruesInLine(line int) int {
 	}
 	return res
 }
+
+func (m *BoolMatrix) Copy() *BoolMatrix {
+	newMatrix := new(BoolMatrix)
+	newMatrix.Init(m.width, m.heigh)
+	for i := 0; i < len(m.matrix); i++ {
+		newMatrix.matrix[i] = m.matrix[i]
+	}
+	return newMatrix
+}
