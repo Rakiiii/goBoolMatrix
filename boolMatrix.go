@@ -18,6 +18,16 @@ func (m *BoolMatrix) Init(w, h int) {
 	m.heigh = h
 }
 
+//Width return matrix width
+func (m *BoolMatrix) Width() int {
+	return m.width
+}
+
+//Heigh return matrix heigh
+func (m *BoolMatrix) Heigh() int {
+	return m.heigh
+}
+
 //GetBool is immulating index operator for matrix returning value containing in @i row and j columne
 func (m *BoolMatrix) GetBool(i, j int) bool {
 	if i > m.heigh || j > m.width {
