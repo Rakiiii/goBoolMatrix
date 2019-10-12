@@ -137,3 +137,22 @@ func (m *BoolMatrix) Copy() *BoolMatrix {
 	}
 	return newMatrix
 }
+
+func (m *BoolMatrix) CheckDisbalance(disb float64) bool {
+	groupsSum := make([]int, m.width)
+	counter := 0
+	for i := 0; i < m.width; i++ {
+		groupsSum[i] += int(m.matrix[counter/8] & byte(math.Pow(2, float64(counter%8))))
+		counter++
+	}
+
+	result := float64(0)
+	for i := 0; i < m.width; i++ {
+		result += math.Abs(float64(groupsSum[i]) - (float64(m.heigh) / float64(m.width)))
+	}
+	if result/float64(m.width) < disb {
+		return true
+	} else {
+		return false
+	}
+}
