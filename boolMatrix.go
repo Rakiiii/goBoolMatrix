@@ -162,7 +162,7 @@ func (m *BoolMatrix) SetByNumber(num *big.Int) bool {
 			bitMask = 254
 		}
 		var subByte byte
-		m.matrix[0] = m.matrix[0] << dif
+		//m.matrix[0] = m.matrix[0] << dif
 		for i := 1; i < len(m.matrix); i++ {
 			subByte = (m.matrix[i] & bitMask) >> (8 - dif)
 			m.matrix[i-1] = (m.matrix[i-1] << dif) | subByte

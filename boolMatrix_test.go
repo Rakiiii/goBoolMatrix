@@ -109,6 +109,11 @@ func TestSetByNumber(t *testing.T) {
 		b2.Print()
 	}
 
+	var m BoolMatrix
+	m.Init(2, 5)
+	m.SetByNumber(big.NewInt(int64(1016)))
+	m.Print()
+
 }
 
 func TestCountTrue(t *testing.T) {
