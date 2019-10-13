@@ -164,3 +164,14 @@ func TestCountTrueInLine(t *testing.T) {
 	}
 
 }
+
+func TestCheckDisbalance(t *testing.T) {
+	var b BoolMatrix
+	b.Init(3, 4)
+	b.SetByNumber(big.NewInt(int64(2217)))
+
+	if b.CheckDisbalance(0.7) {
+		t.Error("Wrong disbalance")
+		b.Print()
+	}
+}
