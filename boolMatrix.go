@@ -207,33 +207,42 @@ func (m *BoolMatrix) Copy() *BoolMatrix {
 func (m *BoolMatrix) CheckDisbalance(disb float64) bool {
 	groupsSum := make([]int, m.width)
 	counter := 0
-	for i := 0; i < m.width; i++ {
-		switch counter % 8 {
-		case 0:
-			groupsSum[i] += int(m.matrix[counter/8] & 1)
-		case 1:
-			groupsSum[i] += int(m.matrix[counter/8] & 2)
-		case 2:
-			groupsSum[i] += int(m.matrix[counter/8] & 4)
-		case 3:
-			groupsSum[i] += int(m.matrix[counter/8] & 8)
-		case 4:
-			groupsSum[i] += int(m.matrix[counter/8] & 16)
-		case 5:
-			groupsSum[i] += int(m.matrix[counter/8] & 32)
-		case 6:
-			groupsSum[i] += int(m.matrix[counter/8] & 64)
-		case 7:
-			groupsSum[i] += int(m.matrix[counter/8] & 128)
+	for counter < m.width*m.heigh {
+		for i := 0; i < m.width; i++ {
+			switch counter % 8 {
+			case 0:
+				groupsSum[i] += int((m.matrix[counter/8] & 128) >> 7)
+				//fmt.Println("case 0 elem value:", int((m.matrix[counter/8]&128)>>7))
+			case 1:
+				groupsSum[i] += int((m.matrix[counter/8] & 64) >> 6)
+			case 2:
+				groupsSum[i] += int((m.matrix[counter/8] & 32) >> 5)
+			case 3:
+				groupsSum[i] += int((m.matrix[counter/8] & 16) >> 4)
+			case 4:
+				groupsSum[i] += int((m.matrix[counter/8] & 8) >> 3)
+			case 5:
+				groupsSum[i] += int((m.matrix[counter/8] & 4) >> 2)
+			case 6:
+				groupsSum[i] += int((m.matrix[counter/8] & 2) >> 1)
+			case 7:
+				groupsSum[i] += int(m.matrix[counter/8] & 1)
+			}
+			//groupsSum[i] += int(m.matrix[counter/8] & byte(math.Pow(2, float64(counter%8))))
+			counter++
 		}
-		//groupsSum[i] += int(m.matrix[counter/8] & byte(math.Pow(2, float64(counter%8))))
-		counter++
 	}
 
 	result := float64(0)
 	for i := 0; i < m.width; i++ {
 		result += math.Abs(float64(groupsSum[i]) - (float64(m.heigh) / float64(m.width)))
+
+		//fmt.Println("colum sum:", groupsSum[i], " total:", result)
+
 	}
+
+	//fmt.Println("Disbalance:", result/float64(m.width), "sum:", result)
+
 	if result/float64(m.width) < disb {
 		return true
 	} else {

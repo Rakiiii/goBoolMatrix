@@ -179,4 +179,14 @@ func TestCheckDisbalance(t *testing.T) {
 		t.Error("Wrong disbalance")
 		b.Print()
 	}
+
+	fmt.Println()
+	var d BoolMatrix
+	d.Init(2, 5)
+	d.SetByNumber(big.NewInt(int64(682)))
+	//d.Print()
+	if !d.CheckDisbalance(1.6) || d.CheckDisbalance(1) {
+		t.Error("Wrong CheckDisbalance")
+		d.Print()
+	}
 }
