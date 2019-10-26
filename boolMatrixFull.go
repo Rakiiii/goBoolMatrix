@@ -160,7 +160,7 @@ func (b *BoolMatrixLinear) CountTruesInLine(line int) int {
 	return counter
 }
 
-//return copy of matrix
+//Copy return copy of matrix
 func (b *BoolMatrixLinear) Copy() *BoolMatrixLinear {
 	var newMatrix BoolMatrixLinear
 	newMatrix.Init(b.width, b.heigh)
@@ -168,6 +168,11 @@ func (b *BoolMatrixLinear) Copy() *BoolMatrixLinear {
 		newMatrix.matrix[i] = elem
 	}
 	return &newMatrix
+}
+
+//CopyIBoolMatrix implements IBoolMatrix Copy method ,returns *BoolMatrixFull as IBoolMatrix
+func (b *BoolMatrixLinear) CopyIBoolMatrix() IBoolMatrix {
+	return b.Copy()
 }
 
 //checking the disbalance of matrix colums amount of trues

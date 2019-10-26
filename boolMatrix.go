@@ -64,6 +64,7 @@ func (m *BoolMatrix) GetBool(i, j int) bool {
 	return false
 }
 
+//SetBool sets value at position [@i][@j] to @value
 func (m *BoolMatrix) SetBool(i, j int, value bool) bool {
 	if i > m.heigh || j > m.width {
 		return false
@@ -127,6 +128,7 @@ func (m *BoolMatrix) SetBool(i, j int, value bool) bool {
 	return false
 }
 
+//SetByNumber sets matrix equls to bit value of @num
 func (m *BoolMatrix) SetByNumber(num *big.Int) bool {
 	slice := num.Bytes()
 	l := len(slice)
@@ -173,6 +175,7 @@ func (m *BoolMatrix) SetByNumber(num *big.Int) bool {
 	return true
 }
 
+//CountTrues returns amount of true value in matrix
 func (m *BoolMatrix) CountTrues() int64 {
 	counter := int64(0)
 	for _, i := range m.matrix {
@@ -184,6 +187,7 @@ func (m *BoolMatrix) CountTrues() int64 {
 	return counter
 }
 
+//CountTruesInLine returns amount of true value in matrix at line @line
 func (m *BoolMatrix) CountTruesInLine(line int) int {
 	lineStart := (line * m.width) / 8
 	counter := (line * m.width) % 8
@@ -195,6 +199,7 @@ func (m *BoolMatrix) CountTruesInLine(line int) int {
 	return res
 }
 
+//Copy returns pointer to copy of object
 func (m *BoolMatrix) Copy() *BoolMatrix {
 	newMatrix := new(BoolMatrix)
 	newMatrix.Init(m.width, m.heigh)
@@ -204,6 +209,12 @@ func (m *BoolMatrix) Copy() *BoolMatrix {
 	return newMatrix
 }
 
+//CopyIBoolMatrix implements IBoolMatrix Copy method ,returns *BoolMatrix as IBoolMatrix
+func (b *BoolMatrix) CopyIBoolMatrix() IBoolMatrix {
+	return b.Copy()
+}
+
+//CheckDisbalance returns result of cheking disbalnce of matrix colums < @disb
 func (m *BoolMatrix) CheckDisbalance(disb float64) bool {
 	groupsSum := make([]int, m.width)
 	counter := 0
@@ -251,6 +262,7 @@ func (m *BoolMatrix) CheckDisbalance(disb float64) bool {
 	}
 }
 
+//Print matrix to stdout
 func (m *BoolMatrix) Print() {
 	for i := 0; i < m.heigh; i++ {
 		for j := 0; j < m.width; j++ {
