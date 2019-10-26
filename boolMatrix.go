@@ -246,6 +246,7 @@ func (m *BoolMatrix) CheckDisbalance(disb float64) bool {
 	if result/float64(m.width) < disb {
 		return true
 	} else {
+		//fmt.Println("disb:", result/float64(m.width))
 		return false
 	}
 }

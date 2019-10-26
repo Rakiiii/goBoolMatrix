@@ -6,14 +6,14 @@ import (
 	"testing"
 )
 
-func TestGetBool(t *testing.T) {
+func TestGetBoolF(t *testing.T) {
 	c := make([]byte, 5)
 	c[0] = 128
 	c[1] = 64
 	c[2] = 32
 	c[3] = 16
 	c[4] = 8
-	var b BoolMatrix
+	var b BoolMatrixLinear
 	b.Init(8, 5)
 	b.SetMatrix(c)
 	if !b.GetBool(0, 0) && !b.GetBool(1, 1) && b.GetBool(2, 3) {
@@ -21,14 +21,14 @@ func TestGetBool(t *testing.T) {
 	}
 }
 
-func TestSetBool(t *testing.T) {
+func TestSetBoolF(t *testing.T) {
 	c := make([]byte, 5)
 	c[0] = 128
 	c[1] = 64
 	c[2] = 32
 	c[3] = 16
 	c[4] = 8
-	var b BoolMatrix
+	var b BoolMatrixLinear
 	b.Init(8, 5)
 	b.SetMatrix(c)
 	b.SetBool(1, 1, false)
@@ -45,11 +45,11 @@ func TestSetBool(t *testing.T) {
 	}
 }
 
-func TestSetByNumber(t *testing.T) {
-	var b BoolMatrix
+func TestSetByNumberF(t *testing.T) {
+	var b BoolMatrixLinear
 	b.Init(8, 2)
 	b.SetByNumber(big.NewInt(int64(65280)))
-	var d BoolMatrix
+	var d BoolMatrixLinear
 	d.Init(8, 2)
 	c := make([]byte, 2)
 	c[0] = 255
@@ -77,14 +77,14 @@ func TestSetByNumber(t *testing.T) {
 		d.Print()
 	}
 
-	var d2 BoolMatrix
+	var d2 BoolMatrixLinear
 	d2.Init(5, 3)
 	d2.SetByNumber(big.NewInt(int64(255)))
 
 	c2 := make([]byte, 2)
 	c2[0] = 1
 	c2[1] = 255
-	var b2 BoolMatrix
+	var b2 BoolMatrixLinear
 	b2.Init(5, 3)
 	b2.SetMatrix(c2)
 	flag = false
@@ -107,17 +107,24 @@ func TestSetByNumber(t *testing.T) {
 		fmt.Println()
 
 		b2.Print()
+
+		fmt.Println("expected:")
+		fmt.Println()
+		var d3 BoolMatrix
+		d3.Init(5, 3)
+		d3.SetByNumber(big.NewInt(int64(255)))
+		d3.Print()
 	}
 
-	var m BoolMatrix
-	m.Init(2, 5)
-	m.SetByNumber(big.NewInt(int64(1016)))
-	m.Print()
+	//var m BoolMatrixLinear
+	//m.Init(2, 5)
+	//m.SetByNumber(big.NewInt(int64(1016)))
+	//m.Print()
 
 }
 
-func TestCountTrue(t *testing.T) {
-	var d BoolMatrix
+func TestCountTrueF(t *testing.T) {
+	var d BoolMatrixLinear
 	d.Init(5, 3)
 	d.SetByNumber(big.NewInt(int64(255)))
 	if d.CountTrues() != 8 {
@@ -127,8 +134,8 @@ func TestCountTrue(t *testing.T) {
 	}
 }
 
-func TestCountTrueInLine(t *testing.T) {
-	var b BoolMatrix
+func TestCountTrueInLineF(t *testing.T) {
+	var b BoolMatrixLinear
 	b.Init(8, 2)
 	b.SetByNumber(big.NewInt(int64(65280)))
 	if b.CountTruesInLine(0) != 8 {
@@ -151,7 +158,7 @@ func TestCountTrueInLine(t *testing.T) {
 
 	}
 
-	var d BoolMatrix
+	var d BoolMatrixLinear
 	d.Init(5, 3)
 	d.SetByNumber(big.NewInt(int64(255)))
 	if d.CountTruesInLine(2) != 5 {
@@ -170,8 +177,8 @@ func TestCountTrueInLine(t *testing.T) {
 
 }
 
-func TestCheckDisbalance(t *testing.T) {
-	var b BoolMatrix
+func TestCheckDisbalanceF(t *testing.T) {
+	var b BoolMatrixLinear
 	b.Init(3, 4)
 	b.SetByNumber(big.NewInt(int64(2217)))
 
@@ -182,7 +189,7 @@ func TestCheckDisbalance(t *testing.T) {
 	}
 
 	fmt.Println()
-	var d BoolMatrix
+	var d BoolMatrixLinear
 	d.Init(2, 5)
 	d.SetByNumber(big.NewInt(int64(682)))
 	//d.Print()
