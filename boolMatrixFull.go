@@ -139,6 +139,7 @@ func (b *BoolMatrixLinear) SetByNumber(num *big.Int) bool {
 func (b *BoolMatrixLinear) CountTrues() int64 {
 	counter := int64(0)
 	for _, elem := range b.matrix {
+		//counter += int64(*(*byte)(unsafe.Pointer(&elem)))
 		if elem {
 			counter++
 		}
