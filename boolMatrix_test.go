@@ -204,7 +204,7 @@ func TestCheckDisbalance(t *testing.T) {
 }
 
 func TestGetNumber(t *testing.T) {
-	fmt.Println("Start TestGetNumber")
+	fmt.Println("Start TestGetNumber:")
 	var b BoolMatrix
 	b.Init(3, 4)
 	b.SetByNumber(big.NewInt(int64(255)))
