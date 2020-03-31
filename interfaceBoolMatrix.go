@@ -16,4 +16,5 @@ type IBoolMatrix interface {
 	CountTruesInLine(line int) int
 	CopyIBoolMatrix() IBoolMatrix
 	CheckDisbalance(disb float64) bool
+	GetNumber()int64
 }

@@ -7,6 +7,7 @@ import (
 )
 
 func TestGetBoolF(t *testing.T) {
+	fmt.Println("Start TestGetBoolF")
 	c := make([]byte, 5)
 	c[0] = 128
 	c[1] = 64
@@ -19,9 +20,11 @@ func TestGetBoolF(t *testing.T) {
 	if !b.GetBool(0, 0) && !b.GetBool(1, 1) && b.GetBool(2, 3) {
 		t.Error("Wrong get bool")
 	}
+	fmt.Println("TestGetBoolF=[ok]")
 }
 
 func TestSetBoolF(t *testing.T) {
+	fmt.Println("Start TestSetBoolF")
 	c := make([]byte, 5)
 	c[0] = 128
 	c[1] = 64
@@ -43,9 +46,11 @@ func TestSetBoolF(t *testing.T) {
 		t.Error("Wrong sey at 4,6")
 		b.Print()
 	}
+	fmt.Println("TestSetBoolF=[ok]")
 }
 
 func TestSetByNumberF(t *testing.T) {
+	fmt.Println("Start TestSetByNumberF=[ok]")
 	var b BoolMatrixLinear
 	b.Init(8, 2)
 	b.SetByNumber(big.NewInt(int64(65280)))
@@ -120,10 +125,11 @@ func TestSetByNumberF(t *testing.T) {
 	//m.Init(2, 5)
 	//m.SetByNumber(big.NewInt(int64(1016)))
 	//m.Print()
-
+	fmt.Println("TestSetByNumberF=[ok]")
 }
 
 func TestCountTrueF(t *testing.T) {
+	fmt.Println("Start TestCountTrueF")
 	var d BoolMatrixLinear
 	d.Init(5, 3)
 	d.SetByNumber(big.NewInt(int64(255)))
@@ -132,9 +138,11 @@ func TestCountTrueF(t *testing.T) {
 		fmt.Println("Matrix:")
 		d.Print()
 	}
+	fmt.Println("TestCountTrueF=[ok]")
 }
 
 func TestCountTrueInLineF(t *testing.T) {
+	fmt.Println("Start TestCountTrueInLineF")
 	var b BoolMatrixLinear
 	b.Init(8, 2)
 	b.SetByNumber(big.NewInt(int64(65280)))
@@ -174,10 +182,11 @@ func TestCountTrueInLineF(t *testing.T) {
 		d.Print()
 
 	}
-
+	fmt.Println("TestCountTrueInLineF=[ok]")
 }
 
 func TestCheckDisbalanceF(t *testing.T) {
+	fmt.Println("Start TestCheckDisbalanceF")
 	var b BoolMatrixLinear
 	b.Init(3, 4)
 	b.SetByNumber(big.NewInt(int64(2217)))
@@ -198,4 +207,17 @@ func TestCheckDisbalanceF(t *testing.T) {
 		fmt.Println("matrix with wrong disb:")
 		d.Print()
 	}
+	fmt.Println("TestCheckDisbalanceF=[ok]")
+}
+
+func TestGetNumberF(t *testing.T) {
+	fmt.Println("Start TestGetNumberF")
+	var b BoolMatrixLinear
+	b.Init(5, 3)
+	b.SetByNumber(big.NewInt(int64(255)))
+
+	if b.GetNumber() != int64(255){
+		t.Error("worong getNumber for full:",b.GetNumber())
+	}
+	fmt.Println("TestGetNumberF=[ok]")
 }

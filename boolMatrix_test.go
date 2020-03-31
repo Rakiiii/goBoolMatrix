@@ -7,6 +7,7 @@ import (
 )
 
 func TestGetBool(t *testing.T) {
+	fmt.Println("Start TestGetBool")
 	c := make([]byte, 5)
 	c[0] = 128
 	c[1] = 64
@@ -19,9 +20,11 @@ func TestGetBool(t *testing.T) {
 	if !b.GetBool(0, 0) && !b.GetBool(1, 1) && b.GetBool(2, 3) {
 		t.Error("Wrong get bool")
 	}
+	fmt.Println("TestGetBool=[ok]")
 }
 
 func TestSetBool(t *testing.T) {
+	fmt.Println("Start TestSetBool")
 	c := make([]byte, 5)
 	c[0] = 128
 	c[1] = 64
@@ -43,9 +46,11 @@ func TestSetBool(t *testing.T) {
 		t.Error("Wrong sey at 4,6")
 		b.Print()
 	}
+	fmt.Println("TestSetBool=[ok]")
 }
 
 func TestSetByNumber(t *testing.T) {
+	fmt.Println("Start TestSetByNumber")
 	var b BoolMatrix
 	b.Init(8, 2)
 	b.SetByNumber(big.NewInt(int64(65280)))
@@ -113,10 +118,11 @@ func TestSetByNumber(t *testing.T) {
 	m.Init(2, 5)
 	m.SetByNumber(big.NewInt(int64(1016)))
 	m.Print()
-
+	fmt.Println("TestSetByNumber=[ok]")
 }
 
 func TestCountTrue(t *testing.T) {
+	fmt.Println("Start TestCountTrue")
 	var d BoolMatrix
 	d.Init(5, 3)
 	d.SetByNumber(big.NewInt(int64(255)))
@@ -125,9 +131,11 @@ func TestCountTrue(t *testing.T) {
 		fmt.Println("Matrix:")
 		d.Print()
 	}
+	fmt.Println("TestCountTrue=[ok]")
 }
 
 func TestCountTrueInLine(t *testing.T) {
+	fmt.Println("Start TestCountTrueInLine")
 	var b BoolMatrix
 	b.Init(8, 2)
 	b.SetByNumber(big.NewInt(int64(65280)))
@@ -167,10 +175,11 @@ func TestCountTrueInLine(t *testing.T) {
 		d.Print()
 
 	}
-
+	fmt.Println("TestCountTrueInLine=[ok]")
 }
 
 func TestCheckDisbalance(t *testing.T) {
+	fmt.Println("Start TestCheckDisbalance")
 	var b BoolMatrix
 	b.Init(3, 4)
 	b.SetByNumber(big.NewInt(int64(2217)))
@@ -191,4 +200,17 @@ func TestCheckDisbalance(t *testing.T) {
 		fmt.Println("matrix with wrong disb:")
 		d.Print()
 	}
+	fmt.Println("TestCheckDisbalance=[ok]")
+}
+
+func TestGetNumber(t *testing.T) {
+	fmt.Println("Start TestGetNumber")
+	var b BoolMatrix
+	b.Init(3, 4)
+	b.SetByNumber(big.NewInt(int64(255)))
+
+	if b.GetNumber() != int64(255){
+		t.Error("worong getNumber for byte:",b.GetNumber())
+	}
+	fmt.Println("TestGetNumber=[ok]")
 }

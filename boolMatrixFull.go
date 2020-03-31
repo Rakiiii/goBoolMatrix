@@ -200,3 +200,15 @@ func (b *BoolMatrixLinear) CheckDisbalance(disb float64) bool {
 		return false
 	}
 }
+
+//GetNumber returns number eq of boolmatrix
+func (b *BoolMatrixLinear)GetNumber()int64{
+	var result float64 = 0
+	for i,v := range b.matrix{
+		if v {
+			result += math.Exp2(float64((b.width*b.heigh - 1) - i))
+		}
+	}
+
+	return int64(result)
+}

@@ -275,3 +275,17 @@ func (m *BoolMatrix) Print() {
 		fmt.Println()
 	}
 }
+
+//GetNumber returns number eq of boolmatrix
+func (m *BoolMatrix)GetNumber()int64{
+	var result float64 = 0
+	for i := 0; i < m.heigh; i++{
+		for j := 0; j < m.width ; j++{
+			if m.GetBool(i,j) {
+				result += math.Exp2(float64((m.width*m.heigh - 1) - (i*m.width+j)))
+			}
+		}
+	} 
+
+	return int64(result)
+}
